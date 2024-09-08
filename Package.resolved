@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "sctokens",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/akki6230/SCTokens",
+      "state" : {
+        "revision" : "e87549f702fa74e09b074bb50b7466180703779a",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -1,5 +1,5 @@
-import SCTokens
 import SwiftUI
+import SCTokens
 
 public enum SDButtonType {
     case ad(_ textStyle: SDTextStyle = .size75(weight: .regular, theme: .primary, alignment: .center))

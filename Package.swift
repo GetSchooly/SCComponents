@@ -4,20 +4,29 @@
 import PackageDescription
 
 let package = Package(
-    name: "SCComponents ",
+    name: "SCComponents",
+    platforms: [
+        .iOS(.v15)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "SCComponents ",
-            targets: ["SCComponents "]),
+            name: "SCComponents",
+            targets: ["SCComponents"]),
+    ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "https://github.com/akki6230/SCTokens", .upToNextMajor(from: Version("1.0.0")))
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SCComponents "),
+            name: "SCComponents",
+            dependencies: ["SCTokens"],
+            exclude: []),
         .testTarget(
             name: "SCComponents Tests",
-            dependencies: ["SCComponents "]),
+            dependencies: ["SCComponents"]),
     ]
 )
