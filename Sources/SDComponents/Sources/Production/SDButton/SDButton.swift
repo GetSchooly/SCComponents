@@ -7,12 +7,14 @@ public struct SDButton: View {
     private let buttonType: SDButtonType
     private let spacing: CGFloat
     private let icon: SDImageType?
+    private let maxWidth: Bool
     private let onTapAction: (() -> Void)?
     
-    public init(_ text: String, buttonType: SDButtonType = .primaryButton(.size100(weight: .regular, theme: .primary, alignment: .center)), spacing: CGFloat = Sizing.sizing1x, icon: SDImageType? = nil, onTapAction: (() -> Void)? = nil) {
+    public init(_ text: String, buttonType: SDButtonType = .primaryButton(.size100(weight: .regular, theme: .primary, alignment: .center)), spacing: CGFloat = Sizing.sizing1x, icon: SDImageType? = nil, maxWidth: Bool = false, onTapAction: (() -> Void)? = nil) {
         self.text = text
         self.buttonType = buttonType
         self.spacing = spacing
+        self.maxWidth = maxWidth
         self.onTapAction = onTapAction
         self.icon = icon
     }
@@ -29,6 +31,7 @@ public struct SDButton: View {
                 }
                 SDText(text, style: textStyle, decoration: .none)
             }
+            .modifier(MaxWidth(isNeeded: maxWidth))
         })
         .buttonStyle(SDButtonStyle(buttonType: buttonType, spacing: spacing))
     }
@@ -37,6 +40,18 @@ public struct SDButton: View {
         switch buttonType {
         case .ad(let textStyle), .plain(let textStyle), .primaryButton(let textStyle), .primaryBordered(let textStyle), .secondryBorderd(let textStyle):
             return textStyle
+        }
+    }
+}
+
+private struct MaxWidth: ViewModifier {
+    var isNeeded: Bool
+    
+    func body(content: Content) -> some View {
+        if isNeeded {
+            content.frame(minWidth: 0, maxWidth: .infinity)
+        } else {
+            content
         }
     }
 }
