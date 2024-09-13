@@ -7,6 +7,7 @@ public enum SDButtonType {
     case primaryButton(_ textStyle: SDTextStyle)
     case primaryBordered(_ textStyle: SDTextStyle)
     case secondryBorderd(_ textStyle: SDTextStyle)
+    case noStyle(_ textStyle: SDTextStyle = .size100(weight: .regular, theme: .primary, alignment: .leading))
 }
 
 struct SDButtonStyle: ButtonStyle {
@@ -28,6 +29,8 @@ struct SDButtonStyle: ButtonStyle {
             BlueBorderedButton(spacing: spacing).makeBody(configuration: configuration)
         case .secondryBorderd(_):
             GrayBorderedButton(spacing: spacing).makeBody(configuration: configuration)
+        case .noStyle(_):
+            NoStyleButton(spacing: spacing).makeBody(configuration: configuration)
         }
     }
 }
@@ -85,3 +88,16 @@ struct GrayBorderedButton: ButtonStyle {
             )
     }
 }
+
+struct NoStyleButton: ButtonStyle {
+    let spacing: CGFloat
+    let forgroundColor: Color = Color.buttonSecondryText
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(spacing)
+            .background(.clear)
+            .foregroundStyle(forgroundColor)
+    }
+}
+

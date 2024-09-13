@@ -38,7 +38,7 @@ public struct SDButton: View {
     
     private var textStyle: SDTextStyle {
         switch buttonType {
-        case .ad(let textStyle), .plain(let textStyle), .primaryButton(let textStyle), .primaryBordered(let textStyle), .secondryBorderd(let textStyle):
+        case .ad(let textStyle), .plain(let textStyle), .primaryButton(let textStyle), .primaryBordered(let textStyle), .secondryBorderd(let textStyle), .noStyle(let textStyle):
             return textStyle
         }
     }
@@ -49,7 +49,7 @@ private struct MaxWidth: ViewModifier {
     
     func body(content: Content) -> some View {
         if isNeeded {
-            content.frame(minWidth: 0, maxWidth: .infinity)
+            content.frame(maxWidth: .infinity)
         } else {
             content
         }
@@ -58,6 +58,7 @@ private struct MaxWidth: ViewModifier {
 
 #Preview {
     VStack {
+        SDButton("No Style", buttonType: .noStyle())
         SDButton("Ad", buttonType: .ad())
         SDButton("Button", buttonType: .plain(.size100(weight: .regular, theme: .primary, alignment: .center)))
         SDButton("info", buttonType: .primaryBordered(.size100(weight: .regular, theme: .primarySub, alignment: .center)))
