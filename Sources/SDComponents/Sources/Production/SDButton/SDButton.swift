@@ -7,21 +7,21 @@ public struct SDButton: View {
     private let buttonType: SDButtonType
     private let spacing: CGFloat
     private let icon: SDImageType?
-    private let maxWidth: Bool
-    private let onTapAction: (() -> Void)?
+    private let maxSize: Bool
+    private let onTapAction: (() -> Void)
     
-    public init(_ text: String, buttonType: SDButtonType = .primaryButton(.size100(weight: .regular, theme: .primary, alignment: .center)), spacing: CGFloat = Sizing.sizing1x, icon: SDImageType? = nil, maxWidth: Bool = false, onTapAction: (() -> Void)? = nil) {
+    public init(_ text: String, buttonType: SDButtonType = .primaryButton(.size100(weight: .regular, theme: .primary, alignment: .center)), spacing: CGFloat = Sizing.sizing1x, icon: SDImageType? = nil, maxSize: Bool = false, onTapAction: @escaping (() -> Void)) {
         self.text = text
         self.buttonType = buttonType
         self.spacing = spacing
-        self.maxWidth = maxWidth
+        self.maxSize = maxSize
         self.onTapAction = onTapAction
         self.icon = icon
     }
     
     public var body: some View {
         Button(action: {
-            onTapAction?()
+            onTapAction()
         }, label: {
             HStack {
                 if let icon = icon {
@@ -31,7 +31,7 @@ public struct SDButton: View {
                 }
                 SDText(text, style: textStyle, decoration: .none)
             }
-            .modifier(MaxWidth(isNeeded: maxWidth))
+            .modifier(MaxSize(isNeeded: maxSize))
         })
         .buttonStyle(SDButtonStyle(buttonType: buttonType, spacing: spacing))
     }
@@ -44,12 +44,12 @@ public struct SDButton: View {
     }
 }
 
-private struct MaxWidth: ViewModifier {
+private struct MaxSize: ViewModifier {
     var isNeeded: Bool
     
     func body(content: Content) -> some View {
         if isNeeded {
-            content.frame(maxWidth: .infinity)
+            content.frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             content
         }
@@ -58,11 +58,16 @@ private struct MaxWidth: ViewModifier {
 
 #Preview {
     VStack {
-        SDButton("No Style", buttonType: .noStyle())
-        SDButton("Ad", buttonType: .ad())
-        SDButton("Button", buttonType: .plain(.size100(weight: .regular, theme: .primary, alignment: .center)))
-        SDButton("info", buttonType: .primaryBordered(.size100(weight: .regular, theme: .primarySub, alignment: .center)))
-        SDButton("More Info", buttonType: .primaryButton(.size100(weight: .regular, theme: .standard, alignment: .center)))
-        SDButton("More Available Information", buttonType: .secondryBorderd(.size100(weight: .regular, theme: .primary, alignment: .center)), spacing: Sizing.sizing2x)
+        SDButton("No Style", buttonType: .noStyle(), onTapAction: {})
+        SDButton("Ad", buttonType: .ad(), onTapAction: {})
+        SDButton("Button", buttonType: .plain(.size100(weight: .regular, theme: .primary, alignment: .center)), onTapAction: {})
+        SDButton("info", buttonType: .primaryBordered(.size100(weight: .regular, theme: .primary, alignment: .center)), onTapAction: {})
+        SDButton("More Info", buttonType: .primaryButton(.size100(weight: .regular, theme: .standard, alignment: .center)), onTapAction: {})
+        SDButton("More Available Information", buttonType: .secondryBorderd(.size100(weight: .regular, theme: .royalBlue, alignment: .center)), spacing: Sizing.sizing2x, onTapAction: {})
+        
+        SDButton("More Info Fill", buttonType: .primaryButton(.size200(weight: .regular, theme: .standard, alignment: .center)), maxSize: true, onTapAction: {})
+            .frame(height: 48)
+            .padding()
+        
     }
 }

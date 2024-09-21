@@ -2,7 +2,7 @@ import SwiftUI
 import SCTokens
 
 public enum SDButtonType {
-    case ad(_ textStyle: SDTextStyle = .size75(weight: .regular, theme: .primary, alignment: .center))
+    case ad(_ textStyle: SDTextStyle = .size75(weight: .regular, theme: .standard, alignment: .center))
     case plain(_ textStyle: SDTextStyle)
     case primaryButton(_ textStyle: SDTextStyle)
     case primaryBordered(_ textStyle: SDTextStyle)
@@ -42,7 +42,7 @@ struct PlainButton: ButtonStyle {
         configuration.label
             .padding(spacing)
             .background(Color.grayStroke)
-            .foregroundStyle(Color.buttonSecondryText)
+            .foregroundStyle(Color.lightGray)
             .clipShape(RoundedRectangle(cornerRadius: Sizing.sizing2x))
     }
 }
@@ -53,8 +53,8 @@ struct BlueButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(spacing)
-            .background(Color.primaryBackground)
-            .foregroundStyle(Color.buttonPrimaryText)
+            .background(Color.royalBlue)
+            .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: Sizing.sizing2x))
     }
 }
@@ -66,10 +66,10 @@ struct BlueBorderedButton: ButtonStyle {
         configuration.label
             .padding(spacing)
             .background(.white)
-            .foregroundStyle(Color.buttonSecondryText)
+            .foregroundStyle(Color.white)
             .overlay(
                 RoundedRectangle(cornerRadius: Sizing.sizing2x)
-                    .stroke(Color.primaryBorder, lineWidth: Sizing.sizing0xHalf)
+                    .stroke(Color.royalBlue, lineWidth: Sizing.sizing0xHalf)
             )
     }
 }
@@ -81,7 +81,7 @@ struct GrayBorderedButton: ButtonStyle {
         configuration.label
             .padding(spacing)
             .background(.white)
-            .foregroundStyle(Color.buttonSecondryText)
+            .foregroundStyle(Color.royalBlue)
             .overlay(
                 RoundedRectangle(cornerRadius: Sizing.sizing2x)
                     .stroke(Color.grayStroke, lineWidth: Sizing.sizing0xHalf)
@@ -91,7 +91,7 @@ struct GrayBorderedButton: ButtonStyle {
 
 struct NoStyleButton: ButtonStyle {
     let spacing: CGFloat
-    let forgroundColor: Color = Color.buttonSecondryText
+    let forgroundColor: Color = Color.white
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

@@ -27,7 +27,7 @@ public struct SDTextField: View {
                     placeholderView
                     textField
                 }
-                .frame(height: Sizing.textFieldHeight)
+                .frame(minHeight: Sizing.textFieldMinHeight)
             }
             .overlay {
                 RoundedRectangle(cornerRadius: Sizing.sizing1x)
@@ -35,7 +35,6 @@ public struct SDTextField: View {
             }
             errorView
         }
-        .padding()
     }
     
     private var textField: some View {
@@ -55,9 +54,9 @@ public struct SDTextField: View {
     private var placeholderView: some View {
         VStack {
             Text(placeholder)
-                .foregroundColor(!isTextFieldInputChanged ? Color.placholder : .primaryText)
-                .font(!isTextFieldInputChanged ? .font100Regular : .font75Light)
-                .frame(height: !isTextFieldInputChanged ? Sizing.textFieldHeight : Sizing.sizing3x)
+                .foregroundColor(!isTextFieldInputChanged ? Color.placholder : .blackColor)
+                .font(!isTextFieldInputChanged ? .font100Regular : .font75Regular)
+                .frame(height: !isTextFieldInputChanged ? Sizing.textFieldMinHeight : Sizing.sizing3x)
                 .padding(EdgeInsets(top: Sizing.sizing1xHalf, leading: !isTextFieldInputChanged ? Sizing.sizing1x : Sizing.sizing2x, bottom: Sizing.sizing1x, trailing: !isTextFieldInputChanged ? Sizing.sizing1x : Sizing.sizing2x))
                 .animation(.linear(duration: 0.3), value: !isTextFieldInputChanged)
             if isTextFieldInputChanged { Spacer() }
@@ -69,7 +68,7 @@ public struct SDTextField: View {
         if text.isEmpty && isTextFieldFocused {
             Text(errorMessage)
                 .frame(alignment: .leading)
-                .font(.font75Light)
+                .font(.font75Regular)
                 .foregroundColor(Color.error)
                 .padding(Spacing.spacing0x)
         }

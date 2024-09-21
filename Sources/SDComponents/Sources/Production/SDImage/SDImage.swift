@@ -41,11 +41,11 @@ public struct SDImage: View {
 }
 
 extension SDImage {
-    private func localImage(resource: String, iconSize: IconSize = .small, contentMode: ContentMode = .fit) -> some View {
+    private func localImage(resource: String, iconSize: IconSize = .small, contentMode: ContentMode = .fit, renderingMode: Image.TemplateRenderingMode = .original) -> some View {
         return VStack(alignment: .center) {
-            Image(resource, bundle: nil)
+            Image(resource, bundle: AppBundle.scToken.bundle)
                 .resizable()
-                .renderingMode(.template)
+                .renderingMode(renderingMode)
                 .aspectRatio(contentMode: contentMode)
         }
         .frame(width: iconSize.width, height: iconSize.height)

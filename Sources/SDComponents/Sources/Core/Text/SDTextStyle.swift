@@ -142,7 +142,7 @@ public enum SDTextWeight {
 public enum SDTextTheme {
     case standard
     case primary
-    case primarySub
+    case royalBlue
     case secondry
     case positive
     case negative
@@ -153,11 +153,11 @@ public enum SDTextTheme {
         case .standard:
             return .white
         case .primary:
-            return .primaryText
-        case .primarySub:
-            return .primarySubText
+            return Color.blackColor
+        case .royalBlue:
+            return .royalBlue
         case .secondry:
-            return .secondryText
+            return .lightGray
         case .positive:
             return .green
         case .negative:

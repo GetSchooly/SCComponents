@@ -1,10 +1,12 @@
 import UIKit
+import SCTokens
 
 public enum AppBundle {
     case signIn
     case parent
     case school
     case main
+    case scToken
     
     public var bundle: Bundle? {
         switch self {
@@ -16,6 +18,8 @@ public enum AppBundle {
             return Bundle(identifier: "com.app.School")
         case .main:
             return Bundle.main
+        case .scToken:
+            return scTokenBundle
         }
     }
 }
