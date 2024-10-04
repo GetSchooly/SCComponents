@@ -24,6 +24,7 @@ let package = Package(
         .target(
             name: "SCComponents",
             dependencies: ["SCTokens"],
+            path: "Sources/SDComponents",
             exclude: []),
         .testTarget(
             name: "SCComponents Tests",

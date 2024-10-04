@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/akki6230/SCTokens",
       "state" : {
-        "revision" : "e87549f702fa74e09b074bb50b7466180703779a",
-        "version" : "1.0.0"
+        "revision" : "1c72e340b44504140dfd6e783ca14879e1b81baf",
+        "version" : "1.0.9"
       }
     }
   ],
