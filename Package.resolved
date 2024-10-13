@@ -3,7 +3,7 @@
     {
       "identity" : "sctokens",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/akki6230/SCTokens",
+      "location" : "https://github.com/GetSchooly/SCTokens",
       "state" : {
         "revision" : "1c72e340b44504140dfd6e783ca14879e1b81baf",
         "version" : "1.0.9"
