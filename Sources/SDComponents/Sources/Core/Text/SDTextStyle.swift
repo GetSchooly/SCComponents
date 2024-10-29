@@ -2,12 +2,25 @@ import SCTokens
 import SwiftUI
 
 public enum SDTextStyle {
+    /// font size 8
     case size50(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 12
     case size75(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 14
     case size90(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 16
     case size100(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 18
     case size200(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 20
     case size300(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 24
     case size400(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
     
     var font: Font {
