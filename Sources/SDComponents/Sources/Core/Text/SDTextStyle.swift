@@ -178,6 +178,7 @@ public enum SDTextTheme {
     case positive
     case negative
     case bright
+    case darkGray
     
     var textColor: Color {
         switch self {
@@ -195,6 +196,8 @@ public enum SDTextTheme {
             return .red
         case .bright:
             return .orange
+        case .darkGray:
+            return .darkGray
         }
     }
 }
