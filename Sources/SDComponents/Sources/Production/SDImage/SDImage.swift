@@ -15,9 +15,9 @@ public struct SDImage: View {
 
     @ViewBuilder
     private func setImage() -> some View {
-        if case .remote(let url, let placeholder, let scale, let contentMode) = imageType {
+        if case .remote(let url, let placeholder, let scale, let contentMode, _) = imageType {
             AnyView(remoteImage(url: url, placeholder: placeholder, scale: scale, contentMode: contentMode))
-        } else if case .local(let resource, let iconSize, let contentMode) = imageType {
+        } else if case .local(let resource, let iconSize, let contentMode, _) = imageType {
             AnyView(localImage(resource: resource, iconSize: iconSize, contentMode: contentMode))
         }
         EmptyView()

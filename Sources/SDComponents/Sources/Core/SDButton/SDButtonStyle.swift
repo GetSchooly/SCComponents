@@ -41,7 +41,7 @@ struct PlainButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(spacing)
-            .background(Color.grayStroke)
+            .background(configuration.isPressed ? Color.black.opacity(0.7) : Color.grayStroke)
             .foregroundStyle(Color.lightGray)
             .clipShape(RoundedRectangle(cornerRadius: Sizing.sizing2x))
     }
@@ -53,7 +53,7 @@ struct BlueButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(spacing)
-            .background(Color.royalBlue)
+            .background(configuration.isPressed ? Color.black.opacity(0.7) : Color.royalBlue)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: Sizing.sizing2x))
     }
@@ -65,7 +65,7 @@ struct BlueBorderedButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(spacing)
-            .background(.white)
+            .background(configuration.isPressed ? Color.black.opacity(0.7) : .white)
             .foregroundStyle(Color.white)
             .overlay(
                 RoundedRectangle(cornerRadius: Sizing.sizing2x)
@@ -80,7 +80,7 @@ struct GrayBorderedButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(spacing)
-            .background(.white)
+            .background(configuration.isPressed ? Color.black.opacity(0.7) : .white)
             .foregroundStyle(Color.royalBlue)
             .overlay(
                 RoundedRectangle(cornerRadius: Sizing.sizing2x)

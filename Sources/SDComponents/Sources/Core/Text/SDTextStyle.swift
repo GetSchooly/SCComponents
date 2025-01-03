@@ -180,6 +180,15 @@ public enum SDTextTheme {
     case bright
     case darkGray
     
+    /// Text Color details:-
+    /// .standard == white
+    /// .primary == blackColor
+    /// .secondry == secondry
+    /// .royalBlue == royalBlue
+    /// .positive == green
+    /// .negative == red
+    /// .bright == orange
+    /// .darkGray == darkGray
     var textColor: Color {
         switch self {
         case .standard:

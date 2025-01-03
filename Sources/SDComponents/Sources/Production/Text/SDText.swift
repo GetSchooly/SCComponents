@@ -19,23 +19,40 @@ public struct SDText: View {
     private let text: Text
     private let style: SDTextStyle
     private let decoration: TextDecorationType
+    private let icon: SDImageType?
     
     /// Creates a styled text view, wtih optional decoration
     /// - Parameters:
     ///   - content: The string to display.
     ///   - style: The style to apply to the text.
     ///   - decoration: The decoration type applied in addition to the text style.
-    public init(_ content: String, style: SDTextStyle, decoration: TextDecorationType = .none) {
+    public init(_ content: String, style: SDTextStyle, decoration: TextDecorationType = .none, icon: SDImageType? = nil) {
         self.text = Text(content).decorate(with: decoration)
         self.style = style
         self.decoration = decoration
+        self.icon = icon
     }
     
     public var body: some View {
-        text
-            .font(style.font)
-            .foregroundStyle(style.theme.textColor)
-            .multilineTextAlignment(style.textAlignment)
+        HStack(content: {
+            if icon?.placement == .left {
+                iconView
+            }
+            text
+                .font(style.font)
+                .foregroundStyle(style.theme.textColor)
+                .multilineTextAlignment(style.textAlignment)
+            if icon?.placement == .right {
+                iconView
+            }
+        })
+    }
+    
+    @ViewBuilder
+    private var iconView: some View {
+        if let icon = icon {
+            SDImage(icon)
+        }
     }
 }
 
