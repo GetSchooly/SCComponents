@@ -5,9 +5,10 @@ public enum SDButtonType {
     case ad(_ textStyle: SDTextStyle = .size75(weight: .regular, theme: .standard, alignment: .center))
     case plain(_ textStyle: SDTextStyle)
     case primaryButton(_ textStyle: SDTextStyle)
-    case primaryBordered(_ textStyle: SDTextStyle)
+    case royalBlueBordered(_ textStyle: SDTextStyle)
     case secondryBorderd(_ textStyle: SDTextStyle)
     case noStyle(_ textStyle: SDTextStyle = .size100(weight: .regular, theme: .primary, alignment: .leading))
+    case blackTextSecondryBordered(_ textStyle: SDTextStyle)
 }
 
 struct SDButtonStyle: ButtonStyle {
@@ -25,12 +26,14 @@ struct SDButtonStyle: ButtonStyle {
             PlainButton(spacing: spacing).makeBody(configuration: configuration)
         case .primaryButton(_):
             BlueButton(spacing: spacing).makeBody(configuration: configuration)
-        case .primaryBordered(_):
+        case .royalBlueBordered(_):
             BlueBorderedButton(spacing: spacing).makeBody(configuration: configuration)
         case .secondryBorderd(_):
             GrayBorderedButton(spacing: spacing).makeBody(configuration: configuration)
         case .noStyle(_):
             NoStyleButton(spacing: spacing).makeBody(configuration: configuration)
+        case .blackTextSecondryBordered(_):
+            BlackTextGreyStrokeBorderedButton(spacing: spacing).makeBody(configuration: configuration)
         }
     }
 }
@@ -101,3 +104,20 @@ struct NoStyleButton: ButtonStyle {
     }
 }
 
+struct BlackTextGreyStrokeBorderedButton: ButtonStyle {
+    let spacing: CGFloat
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.horizontal, spacing)
+            .padding(.vertical, spacing/2)
+            .background(configuration.isPressed ? Color.lightBlue : .white)
+            .foregroundStyle(configuration.isPressed ? Color.royalBlue : .black)
+            .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                    .stroke(configuration.isPressed ? Color.royalBlue : Color.grayStroke, lineWidth: Sizing.sizing0xQuarter)
+            )
+            .clipShape(.capsule(style: .continuous))
+        
+    }
+}
