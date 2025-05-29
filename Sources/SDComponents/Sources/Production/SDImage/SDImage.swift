@@ -1,5 +1,6 @@
 import SwiftUI
 import SCTokens
+import Kingfisher
 
 public struct SDImage: View {
 
@@ -23,25 +24,35 @@ public struct SDImage: View {
         EmptyView()
     }
     
-    private func remoteImage(url: String, placeholder: String? = nil, scale: CGFloat = 1, contentMode: ContentMode = .fill) -> some View {
+    private func remoteImage(url: String, placeholder: String? = nil, scale: CGFloat = 1, contentMode: SwiftUICore.ContentMode = .fill) -> some View {
         guard let imageURL = URL(string: url) else {
-           return AnyView(placeHolderView(placeholder))
+            return AnyView(placeHolderView(placeholder, contentMode: contentMode))
         }
-        return AnyView(AsyncImage(url: imageURL, scale: scale) { phase in
-            if let image = phase.image {
-                image.resizable()
-                    .aspectRatio(contentMode: contentMode)
-            } else { placeHolderView(placeholder) }
-        })
+        return AnyView(
+            KFImage(imageURL)
+                .placeholder({
+                    placeHolderView(placeholder, contentMode: contentMode)
+                })
+                .resizable()
+                .scaleFactor(scale)
+                .aspectRatio(contentMode: contentMode)
+        )
     }
 
-    private func placeHolderView(_ placeholder: String? = nil) -> Image {
-        return Image(systemName: placeholder ?? "photo.fill")
+    private func placeHolderView(_ placeholder: String? = nil, contentMode: SwiftUICore.ContentMode = .fill) -> some View {
+        guard let placeholder else {
+            return Image(Icons.ic_placeholder.value, bundle: AppBundle.scToken.bundle)
+                .resizable()
+                .aspectRatio(contentMode: contentMode)
+        }
+        return Image(placeholder)
+            .resizable()
+            .aspectRatio(contentMode: contentMode)
     }
 }
 
 extension SDImage {
-    private func localImage(resource: String, iconSize: IconSize = .small, contentMode: ContentMode = .fit, renderingMode: Image.TemplateRenderingMode = .original) -> some View {
+    private func localImage(resource: String, iconSize: IconSize = .small, contentMode: SwiftUICore.ContentMode = .fit, renderingMode: Image.TemplateRenderingMode = .original) -> some View {
         return VStack(alignment: .center) {
             Image(resource, bundle: AppBundle.scToken.bundle)
                 .resizable()
