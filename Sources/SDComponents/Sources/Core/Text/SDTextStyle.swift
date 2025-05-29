@@ -179,6 +179,7 @@ public enum SDTextTheme {
     case negative
     case bright
     case darkGray
+    case clear
     
     /// Text Color details:-
     /// .standard == white
@@ -207,6 +208,8 @@ public enum SDTextTheme {
             return .orange
         case .darkGray:
             return .darkGray
+        case .clear:
+            return .clear
         }
     }
 }
