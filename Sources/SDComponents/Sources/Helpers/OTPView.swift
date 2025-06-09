@@ -24,7 +24,7 @@ public struct OtpView:View {
             }
         }.background(content: {
             TextField("", text: $otpText.limit(4))
-                .font(Font.font200SemiBold)
+                .font(Font.font400SemiBold)
                 .keyboardType(.numberPad)
                 .textContentType(.oneTimeCode)
                 .frame(width: 1, height: 1)

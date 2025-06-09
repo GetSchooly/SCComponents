@@ -8,6 +8,7 @@ public struct SDTextField: View {
     @Binding private var showError: Bool
     private let errorMessage: String
     private let isSecure: Bool
+    private let keyboardType: UIKeyboardType
     
     @FocusState private var isTextFieldFocused: Bool
     
@@ -15,12 +16,13 @@ public struct SDTextField: View {
         !text.isEmpty || isTextFieldFocused
     }
     
-    public init(text: Binding<String>, placeholder: String, showError: Binding<Bool>, errorMessage: String, isSecure: Bool = false) {
+    public init(text: Binding<String>, placeholder: String, keyboardType: UIKeyboardType = .default, showError: Binding<Bool>, errorMessage: String, isSecure: Bool = false) {
         self._text = text
         self.placeholder = placeholder
         self._showError = showError
         self.errorMessage = errorMessage
         self.isSecure = isSecure
+        self.keyboardType = keyboardType
     }
 
     public var body: some View {
@@ -30,6 +32,7 @@ public struct SDTextField: View {
                     placeholderView
                     textField
                 }
+                .padding(.horizontal, Spacing.spacing1x)
                 .frame(minHeight: Sizing.textFieldMinHeight)
             }
             .overlay {
@@ -49,6 +52,7 @@ public struct SDTextField: View {
                 .onChange(of: text, perform: { value in
                     
                 })
+                .keyboardType(keyboardType)
         }
         .background(Color.clear)
     }
@@ -90,4 +94,5 @@ struct Usage: View {
 
 #Preview {
     Usage()
+        .padding()
 }
