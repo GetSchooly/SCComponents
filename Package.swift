@@ -17,14 +17,19 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/GetSchooly/SCTokens", .upToNextMajor(from: Version("1.0.0"))),
-        .package(url: "https://github.com/onevcat/Kingfisher", .upToNextMajor(from: Version("8.0.0")))
+        .package(url: "https://github.com/onevcat/Kingfisher", .upToNextMajor(from: Version("8.0.0"))),
+        .package(url: "https://github.com/realm/realm-swift.git", from: "10.43.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SCComponents",
-            dependencies: ["SCTokens", "Kingfisher"],
+            dependencies: [
+                "SCTokens",
+                "Kingfisher",
+                .product(name: "RealmSwift", package: "realm-swift")
+            ],
             path: "Sources/SDComponents",
             exclude: []),
         .testTarget(
