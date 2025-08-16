@@ -2,44 +2,41 @@ import Foundation
 
 public final class CalendarViewModel: ObservableObject {
     private let calendar = Calendar.current
-    public var selectedDate: Date
-    @Published var selectedWeekIndex = 1
-    var currentWeeks: [WeekModel]
-    
+    @Published public var selectedDate: Date
+    @Published var weeks: [WeekModel] = []
+
     public init() {
         let today = calendar.startOfDay(for: Date())
         selectedDate = today
-        currentWeeks = [
-            WeekModel(dates: today.previousWeek),
-            WeekModel(dates: today.currentWeek)
-        ]
+
+        // Start with 10 weeks in the past + current week
+        var tempWeeks: [WeekModel] = []
+        _ = today.currentWeek
+
+        // Add current week at the end
+        tempWeeks.append(WeekModel(dates: today.currentWeek))
+
+        // Prepend past weeks
+        for i in 1...10 {
+            let prevWeek = today.addingTimeInterval(TimeInterval(-7 * 24 * 60 * 60 * i)).currentWeek
+            tempWeeks.insert(WeekModel(dates: prevWeek), at: 0)
+        }
+
+        weeks = tempWeeks
     }
-    
+
     func isDateSelected(_ date: Date) -> Bool {
         calendar.isDate(date, inSameDayAs: selectedDate)
     }
-    
-    func addNeededWeek() {
-        if selectedWeekIndex == 0 {
-            guard let someDate = currentWeeks.first?.dates.first else { return }
-            let weekToAdd = someDate.previousWeek
-            currentWeeks.insert(WeekModel(dates: weekToAdd), at: 0)
-            currentWeeks.removeLast()
-            selectedWeekIndex = 1
-        } else if selectedWeekIndex == 2 {
-            guard let someDate = currentWeeks.last?.dates.first else { return }
-            let weekToAdd = someDate.nextWeek
-            currentWeeks.append(WeekModel(dates: weekToAdd))
-            currentWeeks.removeFirst()
-            selectedWeekIndex = 1
-        }
-    }
-    
-    func updateSelectedDate() {
-        if let index = currentWeeks.first?.dates.firstIndex(of: selectedDate) {
-            selectedDate = currentWeeks[selectedWeekIndex].dates[index]
-        } else if let index = currentWeeks.last?.dates.firstIndex(of: selectedDate) {
-            selectedDate = currentWeeks[selectedWeekIndex].dates[index]
+
+    func loadMorePastWeeks() {
+        if let firstDate = weeks.first?.dates.first {
+            var newWeeks: [WeekModel] = []
+            for i in 1...10 {
+                let prevWeek = firstDate.addingTimeInterval(TimeInterval(-7 * 24 * 60 * 60 * i)).currentWeek
+                newWeeks.insert(WeekModel(dates: prevWeek), at: 0)
+            }
+            weeks.insert(contentsOf: newWeeks, at: 0)
         }
     }
 }
