@@ -23,6 +23,12 @@ public enum SDTextStyle {
     /// font size 24
     case size400(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
     
+    /// font size 28
+    case size500(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
+    /// font size 32
+    case size600(weight: SDTextWeight = .regular, theme: SDTextTheme = .standard, alignment: TextAlignment = .leading)
+    
     var font: Font {
         switch self {
         case .size50(let weight, _, _):
@@ -39,6 +45,10 @@ public enum SDTextStyle {
             font300(weight: weight)
         case .size400(let weight, _, _):
             font400(weight: weight)
+        case .size500(let weight, _, _):
+            font500(weight: weight)
+        case .size600(let weight, _, _):
+            font600(weight: weight)
         }
     }
     
@@ -147,16 +157,46 @@ public enum SDTextStyle {
         }
     }
     
+    private func font500(weight: SDTextWeight) -> Font {
+        switch weight {
+        case .light:
+            return Font.font500Light
+        case .regular:
+            return Font.font500Regular
+        case .medium:
+            return Font.font500Medium
+        case .semiBold:
+            return Font.font500SemiBold
+        case .bold:
+            return Font.font500Bold
+        }
+    }
+    
+    private func font600(weight: SDTextWeight) -> Font {
+        switch weight {
+        case .light:
+            return Font.font600Light
+        case .regular:
+            return Font.font600Regular
+        case .medium:
+            return Font.font600Medium
+        case .semiBold:
+            return Font.font600SemiBold
+        case .bold:
+            return Font.font600Bold
+        }
+    }
+    
     var theme: SDTextTheme {
         switch self {
-        case let .size50(_, theme, _), let .size75(_, theme, _), let .size90(_, theme, _), let .size100(_, theme, _), let .size200(_, theme, _), let .size300(_, theme, _), let .size400(_, theme, _):
+        case let .size50(_, theme, _), let .size75(_, theme, _), let .size90(_, theme, _), let .size100(_, theme, _), let .size200(_, theme, _), let .size300(_, theme, _), let .size400(_, theme, _) , let .size500(_, theme, _) , let .size600(_, theme, _):
             return theme
         }
     }
     
     var textAlignment: TextAlignment {
         switch self {
-        case let .size50(_, _, alignment), let .size75(_, _, alignment), let .size90(_, _, alignment), let .size100(_, _, alignment), let .size200(_, _, alignment), let .size300(_, _, alignment), let .size400(_, _, alignment):
+        case let .size50(_, _, alignment), let .size75(_, _, alignment), let .size90(_, _, alignment), let .size100(_, _, alignment), let .size200(_, _, alignment), let .size300(_, _, alignment), let .size400(_, _, alignment), let .size500(_, _, alignment), let .size600(_, _, alignment) :
             return alignment
         }
     }
