@@ -23,9 +23,12 @@ public struct CalendarView: View {
                                     if hasScrolledToCurrentWeek,
                                        week.id == viewModel.weeks.first?.id {
                                         viewModel.loadMorePastWeeks()
+                                        
                                     }
                                 }
+                                
                         }
+                        
                     }
                 }
                 // initial jump to the current week (today is already selected in your VM init)
