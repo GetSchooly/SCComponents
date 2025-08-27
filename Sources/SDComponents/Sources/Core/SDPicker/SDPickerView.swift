@@ -2,18 +2,14 @@ import SwiftUI
 import SCTokens
 
 public struct SDPickerView: View {
-    
-    // variables/properties
-    @State private var pickerItem: SDPickerModel = .init(id: 0, title: "Sunday")
-    
-    // your view model
+    @State private var pickerItem: SDPickerModel = .init(id: 0, year: 0, title: "Sunday")
     @ObservedObject var viewModel: SDPickerViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     public init(title: String? = nil, viewModel: SDPickerViewModel) {
         self.viewModel = viewModel
     }
-    
+
     public var body: some View {
         NavigationStack {
             VStack {
@@ -42,9 +38,9 @@ public struct SDPickerView: View {
 
 #Preview {
     let items: [SDPickerModel] = [
-        SDPickerModel(id: 1, title: "Item1"),
-        SDPickerModel(id: 2, title: "Item2"),
-        SDPickerModel(id: 3, title: "Item3")
+        SDPickerModel(id: 1, year: 2025, title: "Item1"),
+        SDPickerModel(id: 2, year: 2025, title: "Item2"),
+        SDPickerModel(id: 3, year: 2025, title: "Item3")
     ]
     let viewModel = SDPickerViewModel(items: items) { selected in
         print(selected)
